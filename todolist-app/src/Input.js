@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 
-function Input({onChange}) {
+function Input({value, onChange}) {
     return (
-            <input type="text" placeholder="입력하세요" onChange={onChange}></input>
+            <input type="text" value={value} onChange={onChange}></input>
     );
   }
 
   Input.propTypes = {
+    value : PropTypes.string,
     onChange : PropTypes.func
   }
   
