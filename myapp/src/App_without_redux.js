@@ -4,59 +4,71 @@ import './App.css';
 
 function App_without_redux() {
   return (
-    <div>
-        <RedContainer />
-        <GreenContainer />
-        <BlueContainer />
-        <PurpleContainer />
-    </div>
+    <Parent />
   );
 }
 
-function RedContainer() {
+function Parent(props) { //부모의 setter로 넘긴 후 다시 뿌려서 자식들끼리 공유하는 방식
     const [color, setColor] = useState("white");
+    const style = {
+        backgroundColor:color
+    };
+    console.log("parent : ", props.setColor, props.style);
+    return (
+      <div>
+          <RedContainer setColor={setColor} style={style} />
+          <GreenContainer setColor={setColor} style={style} />
+          <BlueContainer setColor={setColor} style={style} />
+          <PurpleContainer setColor={setColor} style={style} />
+      </div>
+    );
+  }
+
+function RedContainer(props) {
+    // const [color, setColor] = useState("white");
+    console.log("red : ", props);
     const onClick = () => {
-        setColor("red");
+        props.setColor("red");
     };
     return (
-        <div className='container'>
-            <Button text="red" onClick={onClick} style={{backgroundColor:color}} />
+        <div className='container' style={props.style}>
+            <Button text="red" onClick={onClick} />
         </div>
     );
 }
 
-function GreenContainer() {
-    const [color, setColor] = useState("white");
+function GreenContainer(props) {
+    // const [color, setColor] = useState("white");
     const onClick = () => {
-        setColor("green");
+        props.setColor("green");
     };
     return (
-        <div className='container'>
-            <Button text="green" onClick={onClick} style={{backgroundColor:color}} />
+        <div className='container' style={props.style}>
+            <Button text="green" onClick={onClick} />
         </div>
     );
 }
 
-function BlueContainer() {
-    const [color, setColor] = useState("white");
+function BlueContainer(props) {
+    // const [color, setColor] = useState("white");
     const onClick = () => {
-        setColor("blue");
+        props.setColor("blue");
     };
     return (
-        <div className='container'>
-            <Button text="blue" onClick={onClick} style={{backgroundColor:color}} />
+        <div className='container' style={props.style}>
+            <Button text="blue" onClick={onClick} />
         </div>
     );
 }
 
-function PurpleContainer() {
-    const [color, setColor] = useState("white");
+function PurpleContainer(props) {
+    // const [color, setColor] = useState("white");
     const onClick = () => {
-        setColor("purple");
+        props.setColor("purple");
     };
     return (
-        <div className='container'>
-            <Button text="purple" onClick={onClick} style={{backgroundColor:color}} />
+        <div className='container' style={props.style}>
+            <Button text="purple" onClick={onClick} />
         </div>
     );
 }
