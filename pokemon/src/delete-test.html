@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="deleteData()">삭제</button>
+    <script>
+        //preventDefault ~~
+        function deleteData() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("DELETE", "http://localhost:3000/posts/4"); //한번에 삭제는 ?
+            xhr.setRequestHeader("content-type", "application/json; charset=UTF-8"); //key, value
+            
+            xhr.send(); //요청
+
+            xhr.onload = () => { //서버 응답 오면
+                if (xhr.status === 200) {
+                    const res = JSON.parse(xhr.response);
+                    console.log(res);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+        //live server에서 열기 : 포트 5500
+    </script>
+</body>
+</html>

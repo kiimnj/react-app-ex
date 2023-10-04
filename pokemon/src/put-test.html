@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="putData()">수정</button>
+    <script>
+        //prevent ~~
+        function putData() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("PUT", "http://localhost:3000/posts/5");
+            xhr.setRequestHeader("content-type", "application/json; charset=UTF-8"); //key, value
+            
+            const data = { title:"react", author:"typicode" };
+            xhr.send(JSON.stringify(data)); //요청
+
+            xhr.onload = () => { //서버 응답 오면
+                if (xhr.status === 200) {
+                    const res = JSON.parse(xhr.response);
+                    console.log(res);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+        //live server에서 열기 : 포트 5500
+    </script>
+</body>
+</html>
